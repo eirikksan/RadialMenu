@@ -63,9 +63,10 @@ namespace RadialMenuDemo
             this.Left = mouseScreenPosition.X - windowWidth / 2;
             this.Top = mouseScreenPosition.Y - windowHeight / 2;
 
-            // Ensure window stays within screen bounds
-            var workingArea = SystemParameters.WorkArea;
+            // Get the working area of the screen containing the mouse cursor
+            var workingArea = _windowService.GetScreenWorkingArea(mouseScreenPosition);
             
+            // Ensure window stays within the correct screen bounds
             if (this.Left < workingArea.Left)
                 this.Left = workingArea.Left;
             if (this.Top < workingArea.Top)
@@ -95,9 +96,11 @@ namespace RadialMenuDemo
             this.Left = x - this.Width / 2;
             this.Top = y - this.Height / 2;
             
-            // Ensure window stays within screen bounds
-            var workingArea = SystemParameters.WorkArea;
+            // Get the working area of the screen containing the specified position
+            var position = new Point(x, y);
+            var workingArea = _windowService.GetScreenWorkingArea(position);
             
+            // Ensure window stays within the correct screen bounds
             if (this.Left < workingArea.Left)
                 this.Left = workingArea.Left;
             if (this.Top < workingArea.Top)

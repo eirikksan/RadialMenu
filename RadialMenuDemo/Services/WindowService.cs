@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Forms; // Add this for Screen class
 
 namespace MousePositionWindow.Services
 {
@@ -34,6 +35,27 @@ namespace MousePositionWindow.Services
 
             // Convert to WPF's device-independent pixels
             return new Point(lpPoint.X, lpPoint.Y);
+        }
+
+        /// <summary>
+        /// Get the working area bounds of the screen containing the specified point
+        /// </summary>
+        /// <param name="point">Point in screen coordinates</param>
+        /// <returns>Working area bounds of the screen containing the point</returns>
+        public Rect GetScreenWorkingArea(Point point)
+        {
+            // Convert WPF point to System.Drawing.Point for Screen class
+            var drawingPoint = new System.Drawing.Point((int)point.X, (int)point.Y);
+
+            // Get the screen that contains the point
+            var screen = Screen.FromPoint(drawingPoint);
+
+            // Return the working area as a WPF Rect
+            return new Rect(
+                screen.WorkingArea.Left,
+                screen.WorkingArea.Top,
+                screen.WorkingArea.Width,
+                screen.WorkingArea.Height);
         }
 
         // NativeMethods class to interact with Win32 API

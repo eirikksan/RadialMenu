@@ -6,5 +6,6 @@ namespace MousePositionWindow.Services
     {
         void ShowWindowAtMousePosition<T>() where T : Window, new();
         Point GetMousePosition();
+        Rect GetScreenWorkingArea(Point point);
     }
 }
