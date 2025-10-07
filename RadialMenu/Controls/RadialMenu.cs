@@ -19,6 +19,16 @@ namespace RadialMenu.Controls
             set { SetValue(IsOpenProperty, value); }
         }
 
+        public static readonly DependencyProperty EnableAnimationsProperty =
+            DependencyProperty.Register("EnableAnimations", typeof(bool), typeof(RadialMenu),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public bool EnableAnimations
+        {
+            get { return (bool)GetValue(EnableAnimationsProperty); }
+            set { SetValue(EnableAnimationsProperty, value); }
+        }
+
         public static readonly DependencyProperty HalfShiftedItemsProperty =
             DependencyProperty.Register("HalfShiftedItems", typeof(bool), typeof(RadialMenu),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));

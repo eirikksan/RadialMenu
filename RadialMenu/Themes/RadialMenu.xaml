@@ -6,10 +6,15 @@
     <Style TargetType="Controls:RadialMenu">
 
         <Style.Triggers>
-            <Trigger Property="IsOpen" Value="True">
+            <!-- Animated behavior when EnableAnimations is True (default) -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsOpen" Value="True"/>
+                    <Condition Property="EnableAnimations" Value="False"/>
+                </MultiTrigger.Conditions>
 
-                <!-- RadialMenu openning animation -->
-                <Trigger.EnterActions>
+                <!-- RadialMenu opening animation -->
+                <MultiTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
@@ -32,10 +37,10 @@
                             </ObjectAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
-                </Trigger.EnterActions>
+                </MultiTrigger.EnterActions>
 
                 <!-- RadialMenu closing animation -->
-                <Trigger.ExitActions>
+                <MultiTrigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
@@ -58,9 +63,44 @@
                             </ObjectAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
-                </Trigger.ExitActions>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
 
-            </Trigger>
+            <!-- Non-animated behavior when EnableAnimations is False -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsOpen" Value="True"/>
+                    <Condition Property="EnableAnimations" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="Visibility" Value="Visible"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="150" CenterY="150" ScaleX="1" ScaleY="1"/>
+                            <RotateTransform CenterX="150" CenterY="150" Angle="0"/>
+                        </TransformGroup>
+                    </Setter.Value>
+                </Setter>
+            </MultiTrigger>
+
+            <!-- Non-animated behavior when closed and EnableAnimations is False -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsOpen" Value="False"/>
+                    <Condition Property="EnableAnimations" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Opacity" Value="0"/>
+                <Setter Property="Visibility" Value="Collapsed"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="150" CenterY="150" ScaleX="0.5" ScaleY="0.5"/>
+                            <RotateTransform CenterX="150" CenterY="150" Angle="-50"/>
+                        </TransformGroup>
+                    </Setter.Value>
+                </Setter>
+            </MultiTrigger>
         </Style.Triggers>
 
         <!-- Default RadialMenu style (while closed) -->
