@@ -5,73 +5,9 @@
 
     <Style TargetType="Controls:RadialMenu">
 
+        <!-- Instant open/close behavior (animations removed) -->
         <Style.Triggers>
-            <!-- Animated behavior when EnableAnimations is True (default) -->
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsOpen" Value="True"/>
-                    <Condition Property="EnableAnimations" Value="False"/>
-                </MultiTrigger.Conditions>
-
-                <!-- RadialMenu opening animation -->
-                <MultiTrigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="1"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="1"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="1"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[1].Angle">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="0"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
-                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
-                            </ObjectAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.EnterActions>
-
-                <!-- RadialMenu closing animation -->
-                <MultiTrigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="0"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="0.5"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="0.5"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetProperty="RenderTransform.Children[1].Angle">
-                                <SplineDoubleKeyFrame KeyTime="0:0:0.1" KeySpline="0.4,1,0.1,1" Value="-50"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
-                                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Collapsed}"/>
-                            </ObjectAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.ExitActions>
-            </MultiTrigger>
-
-            <!-- Non-animated behavior when EnableAnimations is False -->
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsOpen" Value="True"/>
-                    <Condition Property="EnableAnimations" Value="False"/>
-                </MultiTrigger.Conditions>
+            <Trigger Property="IsOpen" Value="True">
                 <Setter Property="Opacity" Value="1"/>
                 <Setter Property="Visibility" Value="Visible"/>
                 <Setter Property="RenderTransform">
@@ -82,14 +18,8 @@
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
-            </MultiTrigger>
-
-            <!-- Non-animated behavior when closed and EnableAnimations is False -->
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsOpen" Value="False"/>
-                    <Condition Property="EnableAnimations" Value="False"/>
-                </MultiTrigger.Conditions>
+            </Trigger>
+            <Trigger Property="IsOpen" Value="False">
                 <Setter Property="Opacity" Value="0"/>
                 <Setter Property="Visibility" Value="Collapsed"/>
                 <Setter Property="RenderTransform">
@@ -100,7 +30,7 @@
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
-            </MultiTrigger>
+            </Trigger>
         </Style.Triggers>
 
         <!-- Default RadialMenu style (while closed) -->
@@ -108,7 +38,6 @@
         <Setter Property="Visibility" Value="Collapsed"/>
         <Setter Property="Height" Value="300"/>
         <Setter Property="Width" Value="300"/>
-        <!-- Ensure transparent from the very first frame (prevents flash before user style applies) -->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
@@ -125,11 +54,10 @@
 
                 <ControlTemplate TargetType="Controls:RadialMenu">
                     <Grid>
-
                         <!-- RadialMenu background -->
                         <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
 
-                        <!-- Content repitition (for items around) -->
+                        <!-- Content repetition (for items around) -->
                         <ItemsControl ItemsSource="{TemplateBinding Content}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -140,7 +68,6 @@
 
                         <!-- Content (for central item) -->
                         <ContentPresenter Content="{TemplateBinding CentralItem}"/>
-
                     </Grid>
                 </ControlTemplate>
 
