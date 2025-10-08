@@ -4,6 +4,9 @@
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
+    <PackageId>WPF-$(AssemblyName)-Component</PackageId>
+    <Title>WPF-RadialMenu-Component</Title>
+    <Authors>Eirik Kaasbøll Andresen, </Authors>
   </PropertyGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
