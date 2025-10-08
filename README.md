@@ -1,7 +1,7 @@
 RadialMenu
 ===========
 
-A custom control to create radial-menu into your WPF application.
+A custom control to create radial-menu into your WPF application. Initially created by Julien-Marco and updated to .net 8 by Eirik Kaasbøll Andresen.
 
 ![RadialMenu Demo](https://raw.githubusercontent.com/Julien-Marcou/RadialMenu/master/Resources/RadialMenu.gif)
 
