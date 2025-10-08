@@ -6,7 +6,8 @@
     <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     <PackageId>WPF-$(AssemblyName)-Component</PackageId>
     <Title>WPF-RadialMenu-Component</Title>
-    <Authors>Eirik Kaasbøll Andresen, </Authors>
+    <Authors>Eirik Kaasbøll Andresen</Authors>
+    <Description>A radial wpf component</Description>
   </PropertyGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
